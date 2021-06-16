@@ -193,8 +193,6 @@ public class DeviceName {
       DeviceInfo info = database.queryToDevice(codename, model);
       if (info != null) {
         JSONObject json = new JSONObject();
-
-
         if(info.manufacturer!=null){
           json.put("manufacturer", info.manufacturer);
         }else{
@@ -377,8 +375,6 @@ public class DeviceName {
     }
 
     private DeviceInfo(JSONObject jsonObject) throws JSONException {
-
-
       manufacturer = "";
       marketName = jsonObject.getString("market_name");
       codename = jsonObject.getString("codename");
