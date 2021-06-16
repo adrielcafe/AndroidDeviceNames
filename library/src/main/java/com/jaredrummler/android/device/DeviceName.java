@@ -193,7 +193,11 @@ public class DeviceName {
       DeviceInfo info = database.queryToDevice(codename, model);
       if (info != null) {
         JSONObject json = new JSONObject();
-        json.put("manufacturer", info.manufacturer);
+        if(info.manufacturer!=null){
+          json.put("manufacturer", info.manufacturer);
+        }else{
+          json.put("manufacturer", "");
+        }
         json.put("codename", info.codename);
         json.put("model", info.model);
         json.put("market_name", info.marketName);
@@ -211,7 +215,7 @@ public class DeviceName {
       return new DeviceInfo(Build.MANUFACTURER, codename, codename, model); // current device
     }
 
-    return new DeviceInfo(null, null, codename, model); // unknown device
+    return new DeviceInfo("", null, codename, model); // unknown device
   }
 
   /**
@@ -371,7 +375,11 @@ public class DeviceName {
     }
 
     private DeviceInfo(JSONObject jsonObject) throws JSONException {
-      manufacturer = jsonObject.getString("manufacturer");
+      if(jsonObject.has("manufacturer")){
+        manufacturer = jsonObject.getString("manufacturer");
+      }else{
+        manufacturer = "";
+      }
       marketName = jsonObject.getString("market_name");
       codename = jsonObject.getString("codename");
       model = jsonObject.getString("model");
